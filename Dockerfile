@@ -13,4 +13,5 @@ RUN rm -rf /var/lib/apt/lists/* src/*
 
 CMD ipsec start \
   && sleep 5 \
-  && ipsec up ${IPSEC_PROFILE}
+  && ipsec up ${IPSEC_PROFILE} \
+  && tail -f /dev/null
