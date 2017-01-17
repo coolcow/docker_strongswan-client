@@ -29,4 +29,3 @@ CMD \
   # prepare shutdown
     ipsec down wupp; \
     ipsec stop
-
