@@ -26,6 +26,7 @@ CMD \
     # try to ipsec up the profile until success
     && until ipsec up ${PROFILE_NAME}; do sleep 1; done \
     # keep alive check
+    && sleep $KEEPALIVE_CHECK_INTERVAL \
     && if [ ! -z "$KEEPALIVE_CHECK" ]; then eval 'while $KEEPALIVE_CHECK &> /dev/null; do sleep $KEEPALIVE_CHECK_INTERVAL; done; killall tail;' & fi \
     # keep alive
     ; tail -f /var/log/charon.log
