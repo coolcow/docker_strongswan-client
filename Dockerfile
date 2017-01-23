@@ -28,4 +28,4 @@ CMD \
     # keep alive check
     && if [ ! -z "$KEEPALIVE_CHECK" ]; then eval 'while $KEEPALIVE_CHECK &> /dev/null; do sleep $KEEPALIVE_CHECK_INTERVAL; done; killall tail;' & fi \
     # keep alive
-    tail -f /var/log/charon.log
+    ; tail -f /var/log/charon.log
