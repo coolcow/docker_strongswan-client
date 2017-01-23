@@ -6,8 +6,8 @@ ENV PROFILE_NAME "default"
 ENV LOCAL_IP "127.0.0.1"
 ENV WAIT_AFTER_START "10"
 ENV INTERVAL_STATUSCHECK "10"
-ENV SHUTDOWN_CONDITION ""
-ENV SHUTDOWN_CONDITION_SLEEP "10"
+ENV KEEPALIVE_CHECK ""
+ENV KEEPALIVE_CHECK_INTERVAL "10"
 
 RUN apk add --no-cache --update strongswan
 
@@ -25,7 +25,7 @@ CMD \
     && sleep ${WAIT_AFTER_START} \
     # try to ipsec up the profile until success
     && until ipsec up ${PROFILE_NAME}; do sleep 1; done \
-    # shutdown condition
-    && if [ ! -z "$SHUTDOWN_CONDITION" ]; then eval 'while $SHUTDOWN_CONDITION &> /dev/null; do sleep $SHUTDOWN_CONDITION_SLEEP; done; killall tail;' & fi \
+    # keep alive check
+    && if [ ! -z "$KEEPALIVE_CHECK" ]; then eval 'while $KEEPALIVE_CHECK &> /dev/null; do sleep $KEEPALIVE_CHECK_INTERVAL; done; killall tail;' & fi \
     # keep alive
     tail -f /var/log/charon.log
