@@ -14,7 +14,7 @@ RUN apk add --no-cache --update strongswan
 COPY charon-logging.conf /etc/strongswan.d/charon-logging.conf
 COPY cmd.sh /tmp/cmd.sh
 
-RUN chown +x /tmp/cmd.sh
+RUN chmod +x /tmp/cmd.sh
 
 CMD /tmp/cmd.sh
 
