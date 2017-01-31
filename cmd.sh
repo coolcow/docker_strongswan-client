@@ -34,7 +34,7 @@ if [ ! -z "$RECONNECT_IF_NOT" ]; then
   tail -f /var/log/charon.log &
   # keep alive
   while true; do 
-    if [ ! $($RECONNECT_IF_NOT) ]; then 
+    if [ ! eval $RECONNECT_IF_NOT ]; then 
       # reconnect
       tunnel_down; tunnel_up
     fi 
