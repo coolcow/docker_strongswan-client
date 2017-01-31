@@ -33,7 +33,7 @@ tunnel_up
 if [ ! -z "$RECONNECT_IF_NOT" ]; then
   tail -f /var/log/charon.log &
   # keep alive
-  eval "while true; do if [ ! $RECONNECT_IF_NOT ]; then tunnel_down; tunnel_up; fi; sleep $RECONNECT_IF_NOT_INTERVAL; done"
+  eval 'while true; sleep $RECONNECT_IF_NOT_INTERVAL; do while $RECONNECT_IF_NOT &> /dev/null; do sleep $RECONNECT_IF_NOT_INTERVAL; done; tunnel_down; tunnel_up; done'
 else
   # keep alive
   tail -f /var/log/charon.log
